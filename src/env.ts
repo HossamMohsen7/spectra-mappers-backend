@@ -7,6 +7,8 @@ const envSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
   DATABASE_URL: z.string().url(),
+  JWT_SECRET: z.string(),
+  RESEND_API_KEY: z.string(),
 });
 const env = envSchema.parse(process.env);
 export default env;
