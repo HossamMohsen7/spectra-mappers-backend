@@ -10,6 +10,10 @@ import { requestIdMiddleware } from "./middlewares/requestId.js";
 import { errorHandler } from "./utils/errorHandler.js";
 import { errors } from "./config/errors.js";
 import AppError from "./models/error.js";
+import authRouter from "./routes/authRouter.js";
+import locationRouter from "./routes/locationRouter.js";
+import notificationRouter from "./routes/notificationRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 (BigInt.prototype as any).toJSON = function () {
   return this.toString();
@@ -49,6 +53,11 @@ const setupRouters = () => {
   app.get("/", (req, res) => {
     res.status(200).send("Everything is working great!");
   });
+
+  app.use("/auth", authRouter);
+  app.use("/user", userRouter);
+  app.use("/notifications", notificationRouter);
+  app.use("/locations", locationRouter);
 };
 
 const setupErrorHandlers = () => {
