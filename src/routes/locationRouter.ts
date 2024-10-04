@@ -6,7 +6,6 @@ import {
 } from "../middlewares/auth.js";
 import { errors } from "../config/errors.js";
 import { db } from "../db.js";
-import { validate } from "zod-express-validator";
 import {
   validateCreateLocation,
   validateEditLocation,

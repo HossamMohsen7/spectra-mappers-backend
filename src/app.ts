@@ -14,6 +14,7 @@ import authRouter from "./routes/authRouter.js";
 import locationRouter from "./routes/locationRouter.js";
 import notificationRouter from "./routes/notificationRouter.js";
 import userRouter from "./routes/userRouter.js";
+import mapRouter from "./routes/mapRouter.js";
 
 (BigInt.prototype as any).toJSON = function () {
   return this.toString();
@@ -58,6 +59,7 @@ const setupRouters = () => {
   app.use("/user", userRouter);
   app.use("/notifications", notificationRouter);
   app.use("/locations", locationRouter);
+  app.use("/map", mapRouter);
 };
 
 const setupErrorHandlers = () => {
