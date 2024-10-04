@@ -89,16 +89,11 @@ const register: RegisterController = async (req, res) => {
     },
   });
 
-  const [token, tokenId] = await generateToken(newUser);
-
   await db.user.update({
     where: {
       id: newUser.id,
     },
     data: {
-      tokenIds: {
-        push: tokenId,
-      },
       verificationToken: verificationCodeHash,
       verificationRequestAt: new Date(),
       verificationExpiry: new Date(Date.now() + 1000 * 60 * 15),
@@ -109,14 +104,69 @@ const register: RegisterController = async (req, res) => {
 
   res.status(201).json({
     success: true,
-    token,
-    ...userModel(newUser),
   });
 };
 
-const verify: VerifyEmailController = async (req, res) => {};
+const verify: VerifyEmailController = async (req, res) => {
+  const { token } = req.body;
 
-const verifyResend: ResendController = async (req, res) => {};
+  const user = await db.user.findFirst({
+    where: {
+      verificationToken: sha256(token),
+      verificationExpiry: {
+        gte: new Date(),
+      },
+    },
+  });
+
+  if (!user) {
+    throw errors.invalidVerification;
+  }
+
+  await db.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      verified: true,
+      verificationToken: null,
+    },
+  });
+
+  res.status(200).json({
+    success: true,
+  });
+};
+
+const verifyResend: ResendController = async (req, res) => {
+  const { email } = req.body;
+
+  const user = await db.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (user) {
+    const verificationCode = sixDigit();
+    const verificationCodeHash = sha256(verificationCode);
+
+    await db.user.update({
+      where: {
+        email,
+      },
+      data: {
+        verificationToken: verificationCodeHash,
+        verificationRequestAt: new Date(),
+        verificationExpiry: new Date(Date.now() + 1000 * 60 * 15),
+      },
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+  });
+};
 
 export default {
   login,

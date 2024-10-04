@@ -4,6 +4,7 @@ import {
   loginSchema,
   registerSchema,
   requestResetPasswordSchema,
+  resendEmailSchema,
   verifyEmailSchema,
   verifyResetPasswordSchema,
 } from "../schemas/authSchemas.js";
@@ -34,5 +35,5 @@ export type ResetPasswordConfirmController =
 export const validateVerifyEmail = validate({ body: verifyEmailSchema });
 export type VerifyEmailController = typeof validateVerifyEmail;
 
-export const validateResendEmail = validate({ body: verifyEmailSchema });
+export const validateResendEmail = validate({ body: resendEmailSchema });
 export type ResendController = typeof validateResendEmail;
