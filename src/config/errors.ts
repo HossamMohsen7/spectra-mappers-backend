@@ -32,4 +32,6 @@ export const errors = {
     1009,
     "Invalid or expired code."
   ),
+  locationNotFound: AppError.custom(404, 1010, "Location not found."),
+  locationAlreadyExists: AppError.custom(400, 1011, "Location already exists."),
 } as const;

@@ -102,10 +102,15 @@ const startServer = () => {
   });
 };
 
+const startNotificationCron = () => {
+  // Start cron job here
+};
+
 const main = async () => {
   console.log("Environment: " + env.NODE_ENV);
   setupExpressApp();
   startServer();
+  startNotificationCron();
 };
 
 main();

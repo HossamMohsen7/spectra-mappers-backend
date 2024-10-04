@@ -49,6 +49,8 @@ model SavedLocation {
   latitude  Float
   longitude Float
 
+  notificationEnabled Boolean @default(false)
+
   user   User   @relation(fields: [userId], references: [id])
   userId String
 
