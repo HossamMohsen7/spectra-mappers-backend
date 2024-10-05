@@ -7,7 +7,7 @@ const getMetadata = async (
   cloudCoverage: number = 100
 ) => {
   const response = await got
-    .post("http://localhost:8069/search", {
+    .post("https://nasa-map.elyra.games/search", {
       json: {
         longitude,
         latitude,
