@@ -41,12 +41,12 @@ router.post("/most-recent", async (req, res) => {
   });
 });
 
-router.post("/next-aquisition", async (req, res) => {
+router.post("/next-acquisition", async (req, res) => {
   const { longitude, latitude } = req.body;
 
   // Call the service
 
-  const nextAquisition = await mapService.getNextAquisition(
+  const nextAquisition = await mapService.getNextAcquisition(
     longitude,
     latitude
   );

@@ -58,8 +58,7 @@ const getMostRecentMetadata = async (
   return mostRecentMetadata;
 };
 
-const getNextAquisition = async (longitude: number, latitude: number) => {
-  //now as 2024-01-05
+const getNextAcquisition = async (longitude: number, latitude: number) => {
   const now = new Date();
   const nowString = dayjs(now).format("YYYY-MM-DD");
 
@@ -88,5 +87,5 @@ const getNextAquisition = async (longitude: number, latitude: number) => {
 export default {
   getMetadata,
   getMostRecentMetadata,
-  getNextAquisition,
+  getNextAcquisition,
 };
