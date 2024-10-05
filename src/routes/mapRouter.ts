@@ -22,4 +22,39 @@ router.post("/data", async (req, res) => {
   });
 });
 
+router.post("/most-recent", async (req, res) => {
+  const { longitude, latitude, startDate, endDate, cloudCoverage } = req.body;
+
+  // Call the service
+
+  const metadata = await mapService.getMostRecentMetadata(
+    longitude,
+    latitude,
+    startDate,
+    endDate,
+    cloudCoverage
+  );
+
+  res.status(200).json({
+    success: true,
+    data: metadata,
+  });
+});
+
+router.post("/next-aquisition", async (req, res) => {
+  const { longitude, latitude } = req.body;
+
+  // Call the service
+
+  const nextAquisition = await mapService.getNextAquisition(
+    longitude,
+    latitude
+  );
+
+  res.status(200).json({
+    success: true,
+    data: nextAquisition,
+  });
+});
+
 export default router;

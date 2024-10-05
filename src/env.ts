@@ -10,6 +10,7 @@ const envSchema = z.object({
   JWT_SECRET: z.string(),
   RESEND_API_KEY: z.string(),
   EMAIL_PASSWORD: z.string(),
+  REDIS_URL: z.string(),
 });
 const env = envSchema.parse(process.env);
 export default env;
