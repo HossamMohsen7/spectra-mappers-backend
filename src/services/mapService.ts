@@ -6,15 +6,17 @@ const getMetadata = async (
   endDate: string,
   cloudCoverage: number = 100
 ) => {
-  const response = await got("http://localhost:8069/search", {
-    json: {
-      longitude,
-      latitude,
-      start_date: startDate,
-      end_date: endDate,
-      cloud_cover: cloudCoverage,
-    },
-  }).json();
+  const response = await got
+    .post("http://localhost:8069/search", {
+      json: {
+        longitude,
+        latitude,
+        start_date: startDate,
+        end_date: endDate,
+        cloud_cover: cloudCoverage,
+      },
+    })
+    .json();
 
   return response;
 };
