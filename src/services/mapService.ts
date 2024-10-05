@@ -50,7 +50,7 @@ const getMostRecentMetadata = async (
   );
 
   //sort to get most recent metadata
-  const sortedMetadata = metadata.data.scenes.sort((a: any, b: any) => {
+  const sortedMetadata = metadata.scenes.sort((a: any, b: any) => {
     return new Date(b.start_time).getTime() - new Date(a.start_time).getTime();
   });
 
@@ -73,7 +73,7 @@ const getNextAquisition = async (longitude: number, latitude: number) => {
     nowString
   );
 
-  const sortedMetadata = metadata.data.scenes.sort((a: any, b: any) => {
+  const sortedMetadata = metadata.scenes.sort((a: any, b: any) => {
     return new Date(b.start_time).getTime() - new Date(a.start_time).getTime();
   });
 
